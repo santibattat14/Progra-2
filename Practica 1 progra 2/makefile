@@ -2,6 +2,7 @@ limpiar:
 	rm -rf bin
 	rm -rf *.class
 	rm -rf *.jar
+	rm -rf html
 
 
 compilar:limpiar
@@ -11,4 +12,10 @@ compilar:limpiar
 jar:compilar
 	jar cvfm mates.jar manifest.txt -C bin .
 
+html:jar
+	mkdir html
+	find src -type f -name "*.java" | xargs javadoc -d html -encoding utf-8 -docencoding utf-8 -charset utf-8
+	
+mates:html
+	java -jar mates.jar 10000000
 
